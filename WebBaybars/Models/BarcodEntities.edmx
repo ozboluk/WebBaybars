@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BarkodcuboModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AylikSayim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Barkod" Type="nchar" MaxLength="50" />
+          <Property Name="Cinsi" Type="nchar" MaxLength="30" />
+          <Property Name="Miktar" Type="int" />
+          <Property Name="Fiyat" Type="float" />
+          <Property Name="ToplamStok" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Bay_SatisTarihi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Barkod" Type="nchar" MaxLength="50" />
+          <Property Name="SatisTarihi" Type="datetime" />
+          <Property Name="SatisAdeti" Type="int" />
+        </EntityType>
+        <EntityType Name="SonSatislar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Barkod" Type="nchar" MaxLength="50" />
+          <Property Name="SatisAdeti" Type="int" />
+          <Property Name="SatisTarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UrunStokSonu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunId" Type="int" />
+          <Property Name="UrunBittigiTarih" Type="datetime" />
+          <Property Name="ToplamSatilan" Type="int" />
+          <Property Name="Barkod" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ozboluk.ozboluk.site.BUGUN_SATILANLARIN_ADETI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BUGUN_SATILANLARIN_ADETI">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Barkod" Type="nchar" MaxLength="50" />
+          <Property Name="SatisTarihi" Type="datetime" />
+          <Property Name="SatisAdeti" Type="int" />
+        </EntityType>
+        <Function Name="Proc_SatilanUrunuBarkodlaSatisToplaminiOgren" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ozboluk.site">
+          <Parameter Name="Barkod" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_UrunBilgisi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ozboluk.site">
+          <Parameter Name="Barkod" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_UrunSatisAdeti" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ozboluk.site">
+          <Parameter Name="Barkod" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_UrunStokBilgisi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ozboluk.site">
+          <Parameter Name="Barkod" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="ProcEncokSatilanUrunler" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="ozboluk.site" />
+        <EntityContainer Name="BarkodcuboModelStoreContainer">
+          <EntitySet Name="AylikSayim" EntityType="Self.AylikSayim" Schema="ozboluk.site" store:Type="Tables" />
+          <EntitySet Name="Bay_SatisTarihi" EntityType="Self.Bay_SatisTarihi" Schema="ozboluk.site" store:Type="Tables" />
+          <EntitySet Name="SonSatislar" EntityType="Self.SonSatislar" Schema="ozboluk.site" store:Type="Tables" />
+          <EntitySet Name="UrunStokSonu" EntityType="Self.UrunStokSonu" Schema="ozboluk.site" store:Type="Tables" />
+          <EntitySet Name="BUGUN_SATILANLARIN_ADETI" EntityType="Self.BUGUN_SATILANLARIN_ADETI" store:Type="Views" store:Schema="ozboluk.site">
+            <DefiningQuery>SELECT 
+    [BUGUN_SATILANLARIN_ADETI].[Id] AS [Id], 
+    [BUGUN_SATILANLARIN_ADETI].[Barkod] AS [Barkod], 
+    [BUGUN_SATILANLARIN_ADETI].[SatisTarihi] AS [SatisTarihi], 
+    [BUGUN_SATILANLARIN_ADETI].[SatisAdeti] AS [SatisAdeti]
+    FROM [ozboluk.site].[BUGUN_SATILANLARIN_ADETI] AS [BUGUN_SATILANLARIN_ADETI]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BarkodcuboModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BarkodcuboEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AylikSayim" EntityType="BarkodcuboModel.AylikSayim" />
+          <EntitySet Name="Bay_SatisTarihi" EntityType="BarkodcuboModel.Bay_SatisTarihi" />
+          <EntitySet Name="SonSatislar" EntityType="BarkodcuboModel.SonSatislar" />
+          <EntitySet Name="BUGUN_SATILANLARIN_ADETI" EntityType="BarkodcuboModel.BUGUN_SATILANLARIN_ADETI" />
+          <FunctionImport Name="Proc_UrunBilgisi" ReturnType="Collection(BarkodcuboModel.Proc_UrunBilgisi_Result)">
+          <Parameter Name="Barkod" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_UrunSatisAdeti" ReturnType="Collection(Int32)">
+          <Parameter Name="Barkod" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_UrunStokBilgisi" ReturnType="Collection(Int32)">
+          <Parameter Name="Barkod" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_SatilanUrunuBarkodlaSatisToplaminiOgren" ReturnType="Collection(BarkodcuboModel.Proc_SatilanUrunuBarkodlaSatisToplaminiOgren_Result)">
+          <Parameter Name="Barkod" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProcEncokSatilanUrunler" ReturnType="Collection(BarkodcuboModel.ProcEncokSatilanUrunler_Result)" />
+          <EntitySet Name="UrunStokSonu" EntityType="BarkodcuboModel.UrunStokSonu" />
+        </EntityContainer>
+        <EntityType Name="AylikSayim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Barkod" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Cinsi" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Miktar" Type="Int32" />
+          <Property Name="Fiyat" Type="Double" />
+          <Property Name="ToplamStok" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Bay_SatisTarihi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Barkod" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="SatisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="SatisAdeti" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SonSatislar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Barkod" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="SatisAdeti" Type="Int32" />
+          <Property Name="SatisTarihi" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BUGUN_SATILANLARIN_ADETI">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Barkod" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="SatisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="SatisAdeti" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="Proc_UrunBilgisi_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Barkod" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Cinsi" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="Miktar" Nullable="true" />
+          <Property Type="Double" Name="Fiyat" Nullable="true" />
+          <Property Type="Int32" Name="ToplamStok" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Proc_SatilanUrunuBarkodlaSatisToplaminiOgren_Result">
+          <Property Type="String" Name="Barkod" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SatisAdeti" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ProcEncokSatilanUrunler_Result">
+          <Property Type="String" Name="Barkod" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SatisAdeti" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="UrunStokSonu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrunId" Type="Int32" />
+          <Property Name="UrunBittigiTarih" Type="DateTime" Precision="3" />
+          <Property Name="ToplamSatilan" Type="Int32" />
+          <Property Name="Barkod" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BarkodcuboModelStoreContainer" CdmEntityContainer="BarkodcuboEntities">
+        <EntitySetMapping Name="AylikSayim">
+            <EntityTypeMapping TypeName="BarkodcuboModel.AylikSayim">
+              <MappingFragment StoreEntitySet="AylikSayim">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ToplamStok" ColumnName="ToplamStok" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="Cinsi" ColumnName="Cinsi" />
+                <ScalarProperty Name="Barkod" ColumnName="Barkod" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bay_SatisTarihi">
+            <EntityTypeMapping TypeName="BarkodcuboModel.Bay_SatisTarihi">
+              <MappingFragment StoreEntitySet="Bay_SatisTarihi">
+                <ScalarProperty Name="SatisAdeti" ColumnName="SatisAdeti" />
+                <ScalarProperty Name="SatisTarihi" ColumnName="SatisTarihi" />
+                <ScalarProperty Name="Barkod" ColumnName="Barkod" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SonSatislar">
+            <EntityTypeMapping TypeName="BarkodcuboModel.SonSatislar">
+              <MappingFragment StoreEntitySet="SonSatislar">
+                <ScalarProperty Name="SatisTarihi" ColumnName="SatisTarihi" />
+                <ScalarProperty Name="SatisAdeti" ColumnName="SatisAdeti" />
+                <ScalarProperty Name="Barkod" ColumnName="Barkod" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BUGUN_SATILANLARIN_ADETI">
+            <EntityTypeMapping TypeName="BarkodcuboModel.BUGUN_SATILANLARIN_ADETI">
+              <MappingFragment StoreEntitySet="BUGUN_SATILANLARIN_ADETI">
+                <ScalarProperty Name="SatisAdeti" ColumnName="SatisAdeti" />
+                <ScalarProperty Name="SatisTarihi" ColumnName="SatisTarihi" />
+                <ScalarProperty Name="Barkod" ColumnName="Barkod" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Proc_UrunBilgisi" FunctionName="BarkodcuboModel.Store.Proc_UrunBilgisi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BarkodcuboModel.Proc_UrunBilgisi_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Barkod" ColumnName="Barkod" />
+                <ScalarProperty Name="Cinsi" ColumnName="Cinsi" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+                <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+                <ScalarProperty Name="ToplamStok" ColumnName="ToplamStok" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_UrunSatisAdeti" FunctionName="BarkodcuboModel.Store.Proc_UrunSatisAdeti" />
+          <FunctionImportMapping FunctionImportName="Proc_UrunStokBilgisi" FunctionName="BarkodcuboModel.Store.Proc_UrunStokBilgisi" />
+          <FunctionImportMapping FunctionImportName="Proc_SatilanUrunuBarkodlaSatisToplaminiOgren" FunctionName="BarkodcuboModel.Store.Proc_SatilanUrunuBarkodlaSatisToplaminiOgren">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BarkodcuboModel.Proc_SatilanUrunuBarkodlaSatisToplaminiOgren_Result">
+                <ScalarProperty Name="Barkod" ColumnName="Barkod" />
+                <ScalarProperty Name="SatisAdeti" ColumnName="SatisAdeti" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProcEncokSatilanUrunler" FunctionName="BarkodcuboModel.Store.ProcEncokSatilanUrunler">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BarkodcuboModel.ProcEncokSatilanUrunler_Result">
+                <ScalarProperty Name="Barkod" ColumnName="Barkod" />
+                <ScalarProperty Name="SatisAdeti" ColumnName="SatisAdeti" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="UrunStokSonu">
+            <EntityTypeMapping TypeName="BarkodcuboModel.UrunStokSonu">
+              <MappingFragment StoreEntitySet="UrunStokSonu">
+                <ScalarProperty Name="Barkod" ColumnName="Barkod" />
+                <ScalarProperty Name="ToplamSatilan" ColumnName="ToplamSatilan" />
+                <ScalarProperty Name="UrunBittigiTarih" ColumnName="UrunBittigiTarih" />
+                <ScalarProperty Name="UrunId" ColumnName="UrunId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

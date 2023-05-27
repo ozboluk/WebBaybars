@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WebBaybars.Helpers.EnCokSatilanTablosu>
+
+@{
+    ViewBag.Title = "Satislistesi";
+}
+  
+<h2>Satış Toplam Listesi</h2>
+<form action="@Url.Action("Satislistesi")" class="jumbotron">
+    <div class="form-group">
+        <input type="text" name="id" class="form-control" />    <input type="submit" class="btn-success form-control" value="Kontrol Et" />
+        <div class="col-md-3">
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Barkod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UrunAdi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SatisAdeti)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Barkod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UrunAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SatisAdeti)
+        </td>
+    </tr>
+}
+
+</table>

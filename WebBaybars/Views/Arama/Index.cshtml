@@ -1,0 +1,16 @@
+﻿@model IEnumerable<WebBaybars.Helpers.EnCokSatilanTablosu>
+
+@{
+    ViewBag.Title = "Satislistesi";
+}
+
+<h2>Satış Tarihi</h2>
+<form action="@Url.Action("Ara")" class="jumbotron">
+    <div class="form-group">
+        <input type="text" name="id" class="form-control" />    <input type="submit" class="btn-success form-control" value="Kontrol Et" />
+        <div class="col-md-3">
+        </div>
+    </div>
+</form>
+
+

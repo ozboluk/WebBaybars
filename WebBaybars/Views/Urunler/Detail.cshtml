@@ -1,0 +1,51 @@
+﻿@model WebBaybars.Models.AylikSayim
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Detay</h2>
+
+<div>
+    <h4>@Model.Cinsi</h4>
+    <h5>Toplam Satış: @ViewBag.ToplamSatıs</h5>
+    <h5>Toplam Stok: @Model.ToplamStok</h5>
+    <hr />
+    <h5>Kalan Stok: @ViewBag.kalan</h5>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Barkod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Barkod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cinsi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cinsi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fiyat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fiyat)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <td class="jumbotron">
+        <a href="@Url.Action("Edit", "Urunler", new { id = Model.Barkod.Trim() })"><i class="btn btn-warning jumbotron">Düzenle</i></a>
+    </td>
+    | <td class="jumbotron">
+        <a href="@Url.Action("Index", "Home", new { id = Model.Barkod.Trim() })"><i class="btn btn-success jumbotron">Anasayfa</i></a>
+    </td>
+  
+</p>

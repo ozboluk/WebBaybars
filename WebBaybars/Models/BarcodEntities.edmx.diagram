@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="04a366e334e34cad882184de8180637a" Name="Diagram1">
+        <EntityTypeShape EntityType="BarkodcuboModel.AylikSayim" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BarkodcuboModel.Bay_SatisTarihi" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="BarkodcuboModel.SonSatislar" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="BarkodcuboModel.BUGUN_SATILANLARIN_ADETI" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="BarkodcuboModel.UrunStokSonu" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

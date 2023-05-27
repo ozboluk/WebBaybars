@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Populer";
+}
+
+<h3>En Çok Satılanlar</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">
+               Satış Adeti
+            </th>
+            <th scope="col">
+               Barkod
+            </th>
+            <th scope="col">
+                Ürün Adı
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in  ViewBag.EnCokSatilanlar)
+        {
+        <tr>
+            <th>
+                @item.SatisAdeti
+            </th>
+            @try
+            {
+                if (string.IsNullOrEmpty(item.Barkod))
+                {
+                    <td class="danger">
+                        ürün İptalı yapıldı.
+                    </td>
+                }
+                else
+                {
+                    <td class="warning">
+                        @item.Barkod
+                    </td>
+                }
+
+
+                if (WebBaybars.Helpers.GetData.ProductName(item.Barkod.Trim()).Contains("kaydedilmedi."))
+                {
+                    <td class="danger">
+                        <a href="@Url.Action("Create","Urunler",new {id=item.Barkod.Trim() })">
+                            <h4>@WebBaybars.Helpers.GetData.ProductName(item.Barkod.Trim())</h4>
+
+                        </a>
+                    </td>
+                }
+                else
+                {
+                    <td class="success">
+                        <a href="@Url.Action("Detail","Urunler",new {id=item.Barkod.Trim() })">
+                            <h4>@WebBaybars.Helpers.GetData.ProductName(item.Barkod.Trim())</h4>
+
+                        </a>
+                    </td>
+                }
+
+
+            }
+            catch
+            {
+
+            }
+
+
+
+
+
+        </tr>
+        }
+    </tbody>
+</table>
+

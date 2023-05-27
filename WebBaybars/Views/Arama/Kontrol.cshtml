@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Kontrol";
+}
+
+<h2>Kontrol</h2>
+@using (Html.BeginForm())
+{
+    <input type="text" name="id" />
+    <input type="submit" value="Ara" />
+}
+@if (ViewBag.durum == 1)
+{
+    <div class="alert-success jumbotron"> <h3>Bu ürün kayıtlı <br /> @ViewBag.UrunAdi</h3></div>
+}
+else if (ViewBag.durum == 3)
+{
+    <div class="alert-dangerjumbotron"> <h3>@ViewBag.UrunAdi</h3></div>
+    <br />
+    <a href="@Url.Action("Create","Urunler",new {id=ViewBag.Barkod.Trim() })">
+        <h4>Ürün Adı girmek için tıklayın</h4>
+
+    </a>
+}
+else
+{
+    <a>Arama için barkod giriniz</a>
+}

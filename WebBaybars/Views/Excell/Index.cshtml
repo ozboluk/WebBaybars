@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@foreach (var item in (List<string>)ViewBag.demo)
+{
+    <a>@item</a>
+}
+
+
+<h2><a href="@Url.Action("GridExportToExcel", "Excell")" id="export">Excele Aktar</a></h2>
+
+

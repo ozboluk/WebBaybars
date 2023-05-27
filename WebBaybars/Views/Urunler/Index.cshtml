@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model List<WebBaybars.Models.AylikSayim>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<br />
+<div class="tab-content">
+    <div id="firstTab" class="tab-pane fade in active">
+        <table id="employeeTable" class="table table-striped table-condensed demo">
+            <thead>
+                <tr>
+                   
+
+                    <th>
+                        Barkod
+                    </th>
+
+                    <th>Cinsi</th>
+
+                   
+
+                    
+                </tr>
+            </thead>
+            <tbody id="sortable" class="fs">
+                @foreach (var item in Model)
+                {
+                <tr style="cursor:pointer" class="item taskSingleInline" id="task@(item.Barkod)" data-taskid="@item.Barkod">
+            
+                    <td class="jumbotron">
+                        <div class="jumbotron">
+                            <a href="@Url.Action("Create","Urunler",new {id=item.Barkod.Trim() })">
+                                <h4>@item.Barkod</h4>
+
+                            </a>
+                        </div>
+
+                    </td>
+                    <td class="jumbotron">
+                        <div class="jumbotron">
+                   
+                        <a href="@Url.Action("Detail","Urunler",new {id=item.Barkod.Trim() })">
+                            <h4>@WebBaybars.Helpers.GetData.ProductName(item.Barkod.Trim())</h4>
+
+                        </a>
+
+                   
+</div>
+                      
+                    </td>
+                  
+                    @*<td>
+                        <a href="@Url.Action("Edit","Urunler",new {id=item.Barkod.Trim() })" class="btn btn-warning">Değiştir</a>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Delete","Urunler",new {id=item.Barkod.Trim() })" class="btn btn-danger">Sil Gitsin</a>
+                    </td>*@
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="secondTab" class="tab-pane fade in"></div>
+
+</div>
+
+
+
+
+
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+@section scripts{
+
+    <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
+    <script>
+
+        function activateJQueryTable() {
+            $("#employeeTable").DataTable();
+        }
+        $(function () {
+
+            activateJQueryTable();
+
+            $("#sortable").sortable({
+                update: function (event, ui) {
+                    var itemIds = "";
+                    $("#sortable").find(".taskSingleInline").each(function () {
+                        var itemId = $(this).attr("data-taskid");
+                        itemIds = itemIds + itemId + ",";
+
+                    });
+
+                }
+            });
+        });
+
+    </script>
+}
